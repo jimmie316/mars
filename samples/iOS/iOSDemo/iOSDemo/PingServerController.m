@@ -45,7 +45,12 @@
 }
 
 - (NSString *)username {
-    return [(AppDelegate *)[UIApplication sharedApplication].delegate username];
+    //return [(AppDelegate *)[UIApplication sharedApplication].delegate username];
+    __block NSString* name;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        name = [(AppDelegate *)[UIApplication sharedApplication].delegate username];
+    });
+    return name;
 }
 
 - (IBAction)onButtonClick:(id)sender forEvent:(UIEvent *)event {
